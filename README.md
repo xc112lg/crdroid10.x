@@ -1,3 +1,5 @@
 # AOSP Build Releases
 
-Basically repo for releases of roms built by me :D
+```bash
+git clone https://github.com/xc112lg/Releases.git && cd Releases && ./release.sh
+```
