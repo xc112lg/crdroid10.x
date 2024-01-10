@@ -31,6 +31,7 @@ declare -a filenames
 if [[ "$upload_all" =~ ^[Yy]$ ]]; then
   # Upload all .zip files in the current directory
   filenames=(*.zip)
+  filenames=(*.img)
 else
   # Ask the user to input the filenames
   read -p "Enter the filenames (separated by spaces): " -a filenames
