@@ -29,12 +29,13 @@ read -p "Do you want to upload all .zip files in the current directory? (y/n): "
 declare -a filenames
 
 if [[ "$upload_all" =~ ^[Yy]$ ]]; then
-  # Upload all .zip files in the current directory
-  filenames=(*.zip,*.img)
+  # Upload all .zip and .img files in the current directory
+  filenames=(*.zip *.img)
 else
   # Ask the user to input the filenames
   read -p "Enter the filenames (separated by spaces): " -a filenames
 fi
+
 
 # Create the release on GitHub
 if ! gh release create "$version" --title "Release $version" --notes "Release notes"; then
