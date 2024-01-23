@@ -12,15 +12,10 @@ gh auth login
 # Ask for the release tag name
 read -p "Enter the release tag name: " version
 
-# Check if the tag already exists
-if git rev-parse "$version" &> /dev/null; then
-  echo "Error: The release tag '$version' already exists."
-  exit 1
-fi
 
 # Create the tag and push it to GitHub
 git tag -a "$version" -m "Release $version"
-git push origin "$version"
+git push origin "$version"  --force
 
 # Ask the user if they want to upload all .zip files or provide filenames
 read -p "Do you want to upload all .zip files in the current directory? (y/n): " upload_all
