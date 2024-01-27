@@ -9,13 +9,30 @@ fi
 # Ensure the user is authenticated with GitHub
 gh auth login
 
-# Ask for the release tag name
-read -p "Enter the release tag name: " version
+the version:"
+read -r version
 
+# Check if the tag already exists
+if git rev-parse "$version" >/dev/null 2>&1; then
+  # If the tag exists, prompt the user
+  echo "Tag $version already exists. Do you want to delete and recreate it? (yes/no)"
+  read -r response
 
-# Create the tag and push it to GitHub
+  if [[ "$response" =~ ^[Yy][Ee][Ss]$ ]]; then
+    # User chose to delete and recreate the tag
+    git tag -d "$version"
+    git push origin --delete "$version"
+    echo "Deleted existing tag $version."
+  else
+    # User chose to cancel
+    echo "Canceling the tag creation."
+    exit 1
+  fi
+fi
+
+# Create the tag
 git tag -a "$version" -m "Release $version"
-git push origin "$version"  --force
+git push origin "$version"
 
 # Initialize an array to store the filenames
 declare -a filenames
