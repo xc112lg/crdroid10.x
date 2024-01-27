@@ -15,19 +15,26 @@ read -r version
 # Check if the tag already exists
 if git rev-parse "$version" >/dev/null 2>&1; then
   # If the tag exists, prompt the user
-  echo "Tag $version already exists. Do you want to delete and recreate it? (yes/no)"
+  echo "Tag $version already exists. Do you want to delete it along with the release? (yes/no)"
   read -r response
 
   if [[ "$response" =~ ^[Yy]$ ]]; then
-    # User chose to delete and recreate the tag
+    # User chose to delete the tag
     git tag -d "$version"
     git push origin --delete "$version"
     echo "Deleted existing tag $version."
   else
-    # User chose to cancel
-    echo "Canceling the tag creation."
+    # User chose to cancel the tag deletion
+    echo "Canceling the tag and release deletion."
     exit 1
   fi
+fi
+
+# Check if the release exists
+if gh release view "$version" &>/dev/null; then
+  # If the release exists, delete it
+  gh release delete "$version"
+  echo "Deleted existing release $version."
 fi
 
 # Create the tag
