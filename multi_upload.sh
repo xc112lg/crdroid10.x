@@ -9,7 +9,7 @@ fi
 # Ensure the user is authenticated with GitHub
 gh auth login
 
-the version:"
+echo "Enter the version:"
 read -r version
 
 # Check if the tag already exists
