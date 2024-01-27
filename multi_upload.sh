@@ -18,7 +18,7 @@ if git rev-parse "$version" >/dev/null 2>&1; then
   echo "Tag $version already exists. Do you want to delete and recreate it? (yes/no)"
   read -r response
 
-  if [[ "$response" =~ ^[Yy][Ee][Ss]$ ]]; then
+  if [[ "$response" =~ ^[Yy]$ ]]; then
     # User chose to delete and recreate the tag
     git tag -d "$version"
     git push origin --delete "$version"
