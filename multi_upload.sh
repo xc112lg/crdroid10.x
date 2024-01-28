@@ -12,14 +12,15 @@ gh auth login
 # Ask for the release tag name
 read -p "Enter the release tag name: " version
 
-# Check if the release already exists
-if gh release view "$version" &> /dev/null; then
-  # Release exists, delete it
-  gh release delete "$version" --yes
-  echo "Existing release '$version' deleted."
+# Check if the release tag already exists
+if git rev-parse -q --verify "refs/tags/$version" &> /dev/null; then
+  # Tag exists, delete it
+  git tag -d "$version"
+  git push --delete origin "$version"
+  echo "Existing tag '$version' deleted."
 fi
 
-# Create the tag and push it to GitHub
+# Create the new tag and push it to GitHub
 git tag -a "$version" -m "Release $version"
 git push origin "$version"  --force
 
