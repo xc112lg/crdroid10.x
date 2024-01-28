@@ -9,44 +9,19 @@ fi
 # Ensure the user is authenticated with GitHub
 gh auth login
 
-#!/bin/bash
+# Ask for the release tag name
+read -p "Enter the release tag name: " version
 
-echo "Enter the version:"
-read -r version
-
-# Check if the tag already exists
-if git rev-parse "$version" >/dev/null 2>&1; then
-  # If the tag exists, prompt the user
-  echo "Tag $version already exists. Do you want to delete it along with the release? (yes/no)"
-  read -r response
-
-  if [[ "$response" =~ ^[Yy]$ ]]; then
-    # User chose to delete the tag
-    git tag -d "$version"
-    git push origin --delete "$version"
-    echo "Deleted existing tag $version."
-  else
-    # User chose to cancel the tag deletion
-    echo "Canceling the tag and release deletion."
-    exit 1
-  fi
+# Check if the release already exists
+if gh release view "$version" &> /dev/null; then
+  # Release exists, delete it
+  gh release delete "$version" --yes
+  echo "Existing release '$version' deleted."
 fi
 
-# Check if the release exists
-if gh release view "$version" &>/dev/null; then
-  # If the release exists, delete it
-  if gh release delete "$version"; then
-    echo "Deleted existing release $version."
-  else
-    echo "Error: Failed to delete release $version."
-    exit 1
-  fi
-fi
-
-# Create the tag
+# Create the tag and push it to GitHub
 git tag -a "$version" -m "Release $version"
-git push origin "$version"
-
+git push origin "$version"  --force
 
 # Initialize an array to store the filenames
 declare -a filenames
@@ -59,8 +34,11 @@ declare -a filenames
 #  read -p "Enter the filenames (separated by spaces): " -a filenames
 #fi
 
-
-
+# Create the release on GitHub
+if ! gh release create "$version" --title "Release $version" --notes "Release notes"; then
+  echo "Error: Failed to create the release."
+  exit 1
+fi
 
 # Upload the files to the release
 for filename in "${filenames[@]}"; do
