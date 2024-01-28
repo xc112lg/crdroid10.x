@@ -39,7 +39,7 @@ fi
 
 # Create the tag
 git tag -a "$version" -m "Release $version"
-git push origin "$version"
+git push origin "$version"  --force
 
 # Initialize an array to store the filenames
 declare -a filenames
