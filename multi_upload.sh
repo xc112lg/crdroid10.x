@@ -31,9 +31,9 @@ if git rev-parse "$version" >/dev/null 2>&1; then
 fi
 
 # Check if the release exists
-if gh release view "$version" &>/dev/null; then
+if gh Release view "$version" &>/dev/null; then
   # If the release exists, delete it
-  gh release delete "$version"
+  gh Release delete "$version"
   echo "Deleted existing release $version."
 fi
 
