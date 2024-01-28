@@ -14,18 +14,21 @@ fi
 # Ensure the user is authenticated with GitHub
 gh auth login
 
-# Ask for the release tag name
-read -p "Enter the release tag name: " version
+# Prompt the user for the version
+read -p "Enter the release tag name (default: crdroid10.1-$(date '+%Y%m%d')): " custom_version
+
+# Set the version with default if not provided
+version=${custom_version:-"crdroid10.1-$(date '+%Y%m%d')"}
 
 # Check if the tag already exists
 if gh release view "$version" &> /dev/null; then
-  # Tag exists, ask for confirmation to delete the tag and releases
-  read -p "Tag $version already exists. Press Enter to delete it and its releases or Ctrl+C to cancel..."
-  echo "Deleting existing tag and releases for $version..."
-  gh release delete "$version" --yes
-  git tag -d "$version"
-  git push origin --delete "$version"
-  echo "Existing tag and releases deleted."
+    # Tag exists, ask for confirmation to delete the tag and releases
+    read -p "Tag $version already exists. Press Enter to delete it and its releases or Ctrl+C to cancel..."
+    echo "Deleting existing tag and releases for $version..."
+    gh release delete "$version" --yes
+    git tag -d "$version"
+    git push origin --delete "$version"
+    echo "Existing tag and releases deleted."
 fi
 
 # Create the new tag and push it to GitHub
@@ -43,13 +46,13 @@ declare -a filenames
 
 # Create the release on GitHub
 if ! gh release create "$version" --title "Release $version" --notes "Release notes"; then
-  echo "Error: Failed to create the release."
-  exit 1
+    echo "Error: Failed to create the release."
+    exit 1
 fi
 
 # Upload the files to the release
 for filename in "${filenames[@]}"; do
-  gh release upload "$version" "$filename" --clobber
+    gh release upload "$version" "$filename" --clobber
 done
 
 # Display success message
