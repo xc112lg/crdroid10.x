@@ -9,8 +9,10 @@ fi
 # Ensure the user is authenticated with GitHub
 gh auth login
 
+#!/bin/bash
+
 echo "Enter the version:"
-read -p "Enter the release tag name: " version
+read -r version
 
 # Check if the tag already exists
 if git rev-parse "$version" >/dev/null 2>&1; then
@@ -31,15 +33,20 @@ if git rev-parse "$version" >/dev/null 2>&1; then
 fi
 
 # Check if the release exists
-if gh Release view "$version" &>/dev/null; then
+if gh release view "$version" &>/dev/null; then
   # If the release exists, delete it
-  gh Release delete "$version"
-  echo "Deleted existing release $version."
+  if gh release delete "$version"; then
+    echo "Deleted existing release $version."
+  else
+    echo "Error: Failed to delete release $version."
+    exit 1
+  fi
 fi
 
 # Create the tag
 git tag -a "$version" -m "Release $version"
-git push origin "$version"  --force
+git push origin "$version"
+
 
 # Initialize an array to store the filenames
 declare -a filenames
