@@ -10,7 +10,7 @@ fi
 gh auth login
 
 echo "Enter the version:"
-read -r version
+read -p "Enter the release tag name: " version
 
 # Check if the tag already exists
 if git rev-parse "$version" >/dev/null 2>&1; then
