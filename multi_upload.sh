@@ -14,10 +14,16 @@ read -p "Enter the release tag name: " version
 
 # Check if the release tag already exists
 if git rev-parse -q --verify "refs/tags/$version" &> /dev/null; then
-  # Tag exists, delete it
-  git tag -d "$version"
-  git push --delete origin "$version"
-  echo "Existing tag '$version' deleted."
+  # Tag exists, prompt user before deleting
+  read -p "Tag '$version' already exists. Do you want to delete it? (y/n): " delete_tag
+  if [[ "$delete_tag" =~ ^[Yy]$ ]]; then
+    git tag -d "$version"
+    git push --delete origin "$version"
+    echo "Existing tag '$version' deleted."
+  else
+    echo "Aborting script. Please choose a different release tag name."
+    exit 1
+  fi
 fi
 
 # Create the new tag and push it to GitHub
