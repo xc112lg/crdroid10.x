@@ -12,34 +12,29 @@ gh auth login
 # Ask for the release tag name
 read -p "Enter the release tag name: " version
 
-# Check if the release tag already exists
-if git rev-parse -q --verify "refs/tags/$version" &> /dev/null; then
-  # Tag exists, prompt user before deleting
-  read -p "Tag '$version' already exists. Do you want to delete it? (y/n): " delete_tag
-  if [[ "$delete_tag" =~ ^[Yy]$ ]]; then
-    git tag -d "$version"
-    git push --delete origin "$version"
-    echo "Existing tag '$version' deleted."
-  else
-    echo "Aborting script. Please choose a different release tag name."
-    exit 1
-  fi
+# Check if the tag already exists
+if gh release view "$version" &> /dev/null; then
+  # Tag exists, ask for confirmation to delete the tag and releases
+  read -p "Tag $version already exists. Press Enter to delete it and its releases or Ctrl+C to cancel..."
+  echo "Deleting existing tag and releases for $version..."
+  gh release delete "$version" --yes
+  git tag -d "$version"
+  git push origin --delete "$version"
+  echo "Existing tag and releases deleted."
 fi
 
 # Create the new tag and push it to GitHub
 git tag -a "$version" -m "Release $version"
-git push origin "$version"  --force
+git push origin "$version" --force
 
 # Initialize an array to store the filenames
 declare -a filenames
 
-#if [[ "$upload_all" =~ ^[Yy]$ ]]; then
-  # Upload all .zip and .img files in the current directory
-  filenames=(*.zip *.img)
-#else
-  # Ask the user to input the filenames
-#  read -p "Enter the filenames (separated by spaces): " -a filenames
-#fi
+# Uncomment the following block if you want to upload all .zip and .img files in the current directory
+ filenames=(*.zip *.img)
+
+# Otherwise, ask the user to input the filenames
+# read -p "Enter the filenames (separated by spaces): " -a filenames
 
 # Create the release on GitHub
 if ! gh release create "$version" --title "Release $version" --notes "Release notes"; then
