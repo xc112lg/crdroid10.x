@@ -1,5 +1,4 @@
 #!/bin/bash
-cd test
 
 
 if [ -e d56ef67fc68095dd30358048ba5aa771cbbd5862.zip ]; then
