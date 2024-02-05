@@ -1,5 +1,11 @@
 #!/bin/bash
 
+mkdir -p toolchains/arm-eabi
+mkdir -p toolchains/aarch64-elf
+
+
+
+
 
 if [ -e d56ef67fc68095dd30358048ba5aa771cbbd5862.zip ]; then
     echo "File already exists. Skipping wget."
