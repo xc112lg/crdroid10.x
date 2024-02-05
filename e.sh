@@ -1,23 +1,28 @@
 #!/bin/bash
 cd test
-echo ldd --version
-if [ -e 96990bd284a0abaa997cda2a42b434cfc31713f6.zip ]; then
+
+
+if [ -e d56ef67fc68095dd30358048ba5aa771cbbd5862.zip ]; then
     echo "File already exists. Skipping wget."
 else
-wget https://github.com/mvaisakh/gcc-arm/archive/96990bd284a0abaa997cda2a42b434cfc31713f6.zip
-unzip 96990bd284a0abaa997cda2a42b434cfc31713f6.zip -d gcc-arm
+wget https://github.com/mvaisakh/gcc-arm/archive/d56ef67fc68095dd30358048ba5aa771cbbd5862.zip
+unzip d56ef67fc68095dd30358048ba5aa771cbbd5862.zip -d toolchains/arm-eabi
 fi
 
-if [ -e 9bc49b70ec61e1937d7d44930f788d9a727b42e4.zip ]; then
+if [ -e 6c9a692939540ac64ebc619a59e98f5fc3d4b818.zip ]; then
     echo "File already exists. Skipping wget."
 else
-wget https://github.com/mvaisakh/gcc-arm64/archive/9bc49b70ec61e1937d7d44930f788d9a727b42e4.zip
-unzip 9bc49b70ec61e1937d7d44930f788d9a727b42e4.zip -d gcc-arm64
+wget https://github.com/mvaisakh/gcc-arm64/archive/6c9a692939540ac64ebc619a59e98f5fc3d4b818.zip
+unzip 6c9a692939540ac64ebc619a59e98f5fc3d4b818.zip -d toolchains/aarch64-elf
 fi
+
+
 rm -rf msm8996_lge_kernel
-git clone --depth=1 https://github.com/xc112lg/msm8996_lge_kernel -b p2
-msm8996_lge_kernel
-./msm8996_lge_kernel/build_all.sh
+git clone https://github.com/xc112lg/msm8996_lge_kernel -b p3
+cd msm8996_lge_kernel
+
+
+./build_all.sh
 
 
 
