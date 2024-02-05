@@ -1,8 +1,8 @@
 #!/bin/bash
 
 
-mkdir test
-cd test
+mkdir test1
+cd test1
 
 
 
