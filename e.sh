@@ -14,7 +14,7 @@ wget https://github.com/mvaisakh/gcc-arm64/archive/87861a3b86c91f9dfa9c433eea9dc
 unzip -o 87861a3b86c91f9dfa9c433eea9dc035e612595e.zip -d toolchains/aarch64-elf
 
 #rm -rf msm8996_lge_kernel
-#git clone https://github.com/xc112lg/msm8996_lge_kernel -b p3
+git clone --depth 1 https://github.com/xc112lg/msm8996_lge_kernel -b p3
 cd msm8996_lge_kernel
 
 
