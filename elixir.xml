@@ -101,6 +101,10 @@
   <project path="prebuilts/clang/kernel/linux-x86/clang-r416183b" name="android_prebuilts_clang_kernel_linux-x86_clang-r416183b" revision="master" remote="elixir-gitlab" clone-depth="1" />
   <project path="prebuilts/tools-custom" name="prebuilts_tools-custom" remote="elixir" clone-depth="1" />
   
+
+
+  <!-- Tools -->
+  <project path="elixir/scripts" name="scripts" remote="elixir" clone-depth="1" />
   
   <!-- Resources Repos-->
   <project path="packages/resources/devicesettings" name="packages_resources_devicesettings" remote="elixir"  clone-depth="1" />
