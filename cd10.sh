@@ -7,5 +7,6 @@ export CCACHE_DIR=/tmp/src/android/cc
 ccache -M 100G
 git clone https://github.com/xc112lg/android_device_lge_msm8996-common -b cd1 device/lge/msm8996-common && \
 source build/envsetup.sh
+m clean
 lunch lineage_h872-userdebug
 m -j16 bacon
