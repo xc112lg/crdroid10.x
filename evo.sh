@@ -1,3 +1,2 @@
 #!/bin/bash
-
-rm -rf !(cd9)
+find . -mindepth 1 ! -name 'cd9' -exec rm -rf {} +
