@@ -30,5 +30,5 @@ if [ "$1" == "clean" ]; then
     wait_one_second && m clean
 else
     # Build the ROM
-    wait_one_second && m -j16 bacon
+    wait_one_second && m -j15 bacon
 fi
