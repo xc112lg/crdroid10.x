@@ -25,7 +25,7 @@ wait_one_second && export CCACHE_DIR=/tmp/src/android/cc
 wait_one_second && ccache -M 100G
 
 # Clone the repository
-wait_one_second && git clone https://github.com/xc112lg/android_device_lge_msm8996-common -b cd10 device/lge/msm8996-common
+#wait_one_second && git clone https://github.com/xc112lg/android_device_lge_msm8996-common -b cd10 device/lge/msm8996-common
 
 # Set up the build environment
 source build/envsetup.sh
