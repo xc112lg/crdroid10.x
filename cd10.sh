@@ -49,7 +49,7 @@ if [ "$DEVICE" == "all" ]; then
  
 elif [ "$DEVICE" == "h872" ]; then
     echo "Building for h872..."
-    lunch lineage_h872-userdebug
+    lunch lineage_h872-eng
         m -j15 bacon
 elif [ "$DEVICE" == "h870" ]; then
     echo "Building for h870..."
