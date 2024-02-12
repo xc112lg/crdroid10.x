@@ -3,13 +3,19 @@
 # Set default values for device and command
 DEVICE="${1:-all}"  # If no value is provided, default to "all"
 COMMAND="${2:-build}"  # If no value is provided, default to "build"
-
+DELZIP="${3}"
 wait_one_second() {
     sleep 1
 }
 
 # Remove existing build artifacts
+
+# Remove existing build artifacts
+if [ "$DELZIP" == "delzip" ]; then
 wait_one_second && rm -rf out/target/product/*/*.zip  device/lge/msm8996-common
+fi
+
+
 
 # Update and install ccache
 wait_one_second && sudo apt-get update -y
@@ -22,7 +28,7 @@ wait_one_second && ccache -M 100G
 wait_one_second && git clone https://github.com/xc112lg/android_device_lge_msm8996-common -b cd10 device/lge/msm8996-common
 
 # Set up the build environment
-wait_one_second && source build/envsetup.sh
+source build/envsetup.sh
 
 
 # Check if command is "clean"
