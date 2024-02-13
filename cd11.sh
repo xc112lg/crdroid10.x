@@ -26,7 +26,7 @@ wait_one_second && ccache -M 100G
 
 # Clone the repository
 #git clone https://github.com/LineageOS/android_device_lge_msm8996-common -b lineage-21 device/lge/msm8996-common
-git clone https://github.com/xc112lg/android_device_lge_msm8996-common -b cd2 device/lge/msm8996-common
+git clone https://github.com/xc112lg/android_device_lge_msm8996-common -b cd3 device/lge/msm8996-common
 
 # Set up the build environment
 source build/envsetup.sh
