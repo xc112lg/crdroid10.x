@@ -1,5 +1,5 @@
 #!/bin/bash
-rm -rf .repo
+
 rm -rf .repo/local_manifests
 repo init -u https://github.com/RisingTechOSS/android -b fourteen --git-lfs 
 
