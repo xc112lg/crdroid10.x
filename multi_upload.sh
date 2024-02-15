@@ -11,8 +11,13 @@ else
     echo "GitHub CLI 'gh' is already installed."
 fi
 
-# Ensure the user is authenticated with GitHub
-gh auth login
+# Check if user is already authenticated
+if ! gh auth status &> /dev/null; then
+    # User not authenticated, perform login
+    gh auth login
+else
+    echo "Already authenticated with GitHub."
+fi
 
 # Prompt the user for the version
 read -p "Enter the release tag name (default: crdroid10.1-$(date '+%Y%m%d')): " custom_version
