@@ -1,13 +1,5 @@
 #!/bin/bash
 
-rm -rf hardware/qcom-caf/msm8953/*
-rm -rf hardware/qcom-caf/msm8998/*
-rm -rf hardware/qcom-caf/sdm660/*
-rm -rf hardware/qcom-caf/sdm845/*
-rm -rf hardware/qcom-caf/sm8250/*
-rm -rf hardware/qcom-caf/sm8350/*
-rm -rf hardware/qcom-caf/sm8450/*
-rm -rf hardware/qcom-caf/sm8550/*
 
 
 # Set default values for device and command
@@ -60,10 +52,6 @@ if [ "$DEVICE" == "all" ]; then
  
 elif [ "$DEVICE" == "h872" ]; then
     echo "Building for h872..."
-    lunch lineage_us997-userdebug
-    m -j15 bacon
-    lunch lineage_h870-userdebug
-    m -j15 bacon
     lunch lineage_h872-userdebug
     m -j15 bacon
 elif [ "$DEVICE" == "h870" ]; then
