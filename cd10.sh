@@ -59,6 +59,8 @@ elif [ "$DEVICE" == "h870" ]; then
 
     lunch lineage_h870-userdebug
     m -j15 bacon
+    lunch lineage_h872-userdebug
+    m -j15 bacon
 else
     echo "Building for the specified device: $DEVICE..."
     # Build for the specified device
