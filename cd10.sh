@@ -52,11 +52,12 @@ if [ "$DEVICE" == "all" ]; then
  
 elif [ "$DEVICE" == "h872" ]; then
     echo "Building for h872..."
+m installclean
     lunch lineage_h872-userdebug
     m -j15 bacon
 elif [ "$DEVICE" == "h870" ]; then
     echo "Building for h870..."
-
+m installclean
     lunch lineage_h870-userdebug
     m -j15 bacon
     lunch lineage_h872-userdebug
