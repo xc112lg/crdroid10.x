@@ -6,22 +6,20 @@
 DEVICE="${1:-all}"  # If no value is provided, default to "all"
 COMMAND="${2:-build}"  # If no value is provided, default to "build"
 DELZIP="${3}"
-wait_one_second() {
-    sleep 1
-}
+
 
 # Remove existing build artifacts
 # Update and install ccache
-wait_one_second && sudo apt-get update -y
-wait_one_second && sudo apt-get install -y apt-utils
-wait_one_second && sudo apt-get install -y ccache
-wait_one_second && export USE_CCACHE=1
-wait_one_second && ccache -M 100G
-wait_one_second && export CCACHE_DIR=/tmp/src/manifest/cc
+sudo apt-get update -y
+sudo apt-get install -y apt-utils
+sudo apt-get install -y ccache
+export USE_CCACHE=1
+ccache -M 100G
+export CCACHE_DIR=/tmp/src/manifest/cc
 echo $CCACHE_DIR
 # Remove existing build artifacts
 if [ "$DELZIP" == "delzip" ]; then
-wait_one_second && rm -rf out/target/product/*/*.zip  device/lge/msm8996-common
+rm -rf out/target/product/*/*.zip  device/lge/msm8996-common
 git clone https://github.com/LineageOS/android_device_lge_msm8996-common -b lineage-21 device/lge/msm8996-common
 #some fixes will be push to source fter testing
 cd device/lge/msm8996-common
