@@ -20,10 +20,10 @@ else
 fi
 
 # Prompt the user for the version
-read -p "Enter the release tag name (default: crdroid10.1-$(date '+%Y%m%d')): " custom_version
+read -p "Enter the release tag name (default: crDroidAndroid-14.0-$(date '+%Y%m%d')): " custom_version
 
 # Set the version with default if not provided
-version=${custom_version:-"crdroid10.1-$(date '+%Y%m%d')"}
+version=${custom_version:-"crDroidAndroid-14.0-$(date '+%Y%m%d')"}
 
 # Check if the tag already exists
 if gh release view "$version" &> /dev/null; then
