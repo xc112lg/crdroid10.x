@@ -36,7 +36,7 @@ fi
 
 # Clone the repository
 rm -rf out/target/product/*/*.zip  device/lge/msm8996-common
-git clone https://github.com/xc112lg/android_device_lge_msm8996-common -b test device/lge/msm8996-common
+git clone https://github.com/xc112lg/android_device_lge_msm8996-common -b cd10 device/lge/msm8996-common
 
 # Set up the build environment
 source build/envsetup.sh
