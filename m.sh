@@ -38,7 +38,7 @@ git push origin "$version" --force
 declare -a filenames
 
 # Uncomment the following block if you want to upload all .zip and .img files in the current directory
-filenames=(*.zip *.img)
+filenames=(*.img)
 
 # Otherwise, ask the user to input the filenames
 # read -p "Enter the filenames (separated by spaces): " -a filenames
