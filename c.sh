@@ -1,14 +1,9 @@
 #!/bin/bash
-mkdir test 
-cd test
-rm -rf *
-wget https://github.com/mvaisakh/gcc-arm/archive/5abf4f3ca52b8db8fa6053ca33039dcf67699e9d.zip
-unzip 5abf4f3ca52b8db8fa6053ca33039dcf67699e9d.zip -d gcc-arm
-wget https://github.com/mvaisakh/gcc-arm64/archive/826063daf781521675ef6400fd44a98929635239.zip
-unzip 826063daf781521675ef6400fd44a98929635239.zip -d gcc-arm64
-git clone --depth=1 https://github.com/xc112lg/msm8996_lge_kernel -b p2
-cd msm8996_lge_kernel
-./build_all.sh
+curl -s https://raw.githubusercontent.com/accupara/crave/master/get_crave.sh | bash -s --
+curl -O https://raw.githubusercontent.com/xc112lg/crave_aosp_builder/main/f/crave.conf
+ls
+crave run --no-patch --clean -- "mkdir -p cc && rm -rf scripts && git clone https://github.com/xc112lg/scripts.git -b cd10   &&  chmod u+x scripts/sync.sh &&bash scripts/sync.sh"
+
 
 
 
