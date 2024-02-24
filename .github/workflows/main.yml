@@ -1,0 +1,16 @@
+name: My GitHub Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5  # Set the maximum execution time for the job
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Add your commands here
