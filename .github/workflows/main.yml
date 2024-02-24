@@ -1,4 +1,4 @@
-name: My GitHub Workflow
+name: Test Timeout Workflow
 
 on:
   push:
@@ -6,11 +6,12 @@ on:
       - main
 
 jobs:
-  my-job:
+  test-job:
     runs-on: ubuntu-latest
-    timeout-minutes: 5  # Set the maximum execution time for the job
+    timeout-minutes: 1
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Add your commands here
+      - name: Simulate delay
+        run: sleep 300  # This will sleep for 5 minutes, exceeding the 1-minute timeout
