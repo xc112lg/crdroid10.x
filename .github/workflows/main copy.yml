@@ -18,6 +18,11 @@ jobs:
           # Your script/command to edit the file
           echo "echo 'Hello, World!'" > d.sh
 
+      - name: Debug
+        run: |
+          echo "Token: ${{ secrets.GITHU_TOKEN }}"
+          env
+
       - name: Commit and Push Changes
         run: |
           git config --local user.email "action@github.com"
@@ -26,11 +31,5 @@ jobs:
           git add d.sh
           git commit -m "Update d.sh via GitHub Actions"
           
-          # Use a personal access token (PAT) to authenticate
+          # Use the default GITHUB_TOKEN for authentication
           git push https://${{ secrets.GITHU_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
-
-   - name: Debug
-          run: |
-            echo "Token: ${{ secrets.GITHUB_TOKEN }}"
-            env
-        
