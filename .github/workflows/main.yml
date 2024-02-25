@@ -1,4 +1,4 @@
-name: Test Timeout Workflow
+name: Download File Workflow
 
 on:
   push:
@@ -6,12 +6,16 @@ on:
       - main
 
 jobs:
-  test-job:
+  download-file:
     runs-on: ubuntu-latest
-    timeout-minutes: 1
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
 
-      - name: Simulate delay
-        run: sleep 300  # This will sleep for 5 minutes, exceeding the 1-minute timeout
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Get Raw Content URL
+      id: raw_url
+      run: echo "::set-output name=url::$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/contents/cd10.sh" | jq -r '.download_url')"
+
+    - name: Download File
+      run: wget -O cd10.sh "${{ steps.raw_url.outputs.url }}"
