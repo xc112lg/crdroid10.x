@@ -15,7 +15,9 @@ jobs:
 
     - name: Get Raw Content URL
       id: raw_url
-      run: echo "::set-output name=url::$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/contents/cd10.sh" | jq -r '.download_url')"
+      run: |
+        DOWNLOAD_URL=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/contents/cd10.sh" | jq -r '.download_url')
+        echo "DOWNLOAD_URL=${DOWNLOAD_URL}" >> $GITHUB_ENV
 
     - name: Download File
-      run: wget -O cd10.sh "${{ steps.raw_url.outputs.url }}"
+      run: wget -O cd10.sh "${{ env.DOWNLOAD_URL }}"
