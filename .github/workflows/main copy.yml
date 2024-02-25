@@ -1,4 +1,4 @@
-name: Edit File Workflow
+name: Edit File Locally Workflow
 
 on:
   push:
@@ -6,23 +6,19 @@ on:
       - main
 
 jobs:
-  edit-file:
+  edit-file-locally:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Edit File
-      run: echo "Your new content" > d.sh
+    - name: Edit File Locally
+      run: ls;echo "Your new content" > d.sh 
 
-    - name: Commit Changes
+    - name: Commit Changes Locally
       run: |
         git config --local user.email "actions@github.com"
         git config --local user.name "GitHub Actions"
         git add d.sh
-        git commit -m "Update d.sh via workflow"
-
-    - name: Push Changes
-      run: |
-        git push origin main
+        git commit -m "Update d.sh locally via workflow"
