@@ -23,7 +23,7 @@ jobs:
           echo "Token: ${{ secrets.GITHU_TOKEN }}"
           env
 
-      - name: Commit and Push Changesf
+      - name: Commit and Push Changesff
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
