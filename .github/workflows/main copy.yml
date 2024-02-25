@@ -1,4 +1,4 @@
-name: Edit and Push d.sh
+name: Edit d.sh and Push Changes
 
 on:
   push:
@@ -6,20 +6,21 @@ on:
       - main
 
 jobs:
-  edit-and-push:
+  edit-dsh-and-push:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Run d.sh script to edit the file
-        run: bash d.sh
+      - name: Edit the d.sh file
+        run: |
+          echo 'echo "Hello, World!"' > d.sh
 
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add d.sh
-          git commit -m "Update d.sh via GitHub Actions"
+          git commit -m "Edit d.sh via GitHub Actions"
           git push
