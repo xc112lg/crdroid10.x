@@ -1,4 +1,4 @@
-name: Edit and Push File
+name: Edit and Push d.sh
 
 on:
   push:
@@ -13,13 +13,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Edit the file
-        run: echo "Your new content" > path/to/your/file.txt
+      - name: Run d.sh script to edit the file
+        run: bash d.sh
 
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add .
-          git commit -m "Update file via GitHub Actions"
+          git add d.sh
+          git commit -m "Update d.sh via GitHub Actions"
           git push
