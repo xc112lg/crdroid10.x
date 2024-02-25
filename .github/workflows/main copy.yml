@@ -29,7 +29,7 @@ jobs:
           # Use a personal access token (PAT) to authenticate
           git push https://${{ secrets.GITHU_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
 
-       - name: Debug
+   - name: Debug
           run: |
             echo "Token: ${{ secrets.GITHUB_TOKEN }}"
             env
