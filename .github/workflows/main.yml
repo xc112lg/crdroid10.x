@@ -13,11 +13,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Get Raw Content URL
-      id: raw_url
-      run: |
-        DOWNLOAD_URL=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/contents/cd10.sh" | jq -r '.download_url')
-        echo "DOWNLOAD_URL=${DOWNLOAD_URL}" >> $GITHUB_ENV
+    - name: Set File URL
+      id: set_url
+      run: echo "::set-output name=url::https://raw.githubusercontent.com/${{ github.repository }}/main/cd10.sh"
 
     - name: Download File
-      run: wget -O cd10.sh "${{ env.DOWNLOAD_URL }}"
+      run: wget -O cd10.sh "${{ steps.set_url.outputs.url }}"
