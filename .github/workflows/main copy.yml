@@ -32,4 +32,5 @@ jobs:
           git commit -m "Update d.sh via GitHub Actions"
           
           # Use the default GITHUB_TOKEN for authentication
-          git push https://${{ secrets.GITHU_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+          git push --force https://${{ secrets.GITHU_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+
