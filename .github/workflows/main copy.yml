@@ -1,8 +1,28 @@
-- name: Commit and Push Changes
-  run: |
-    git config --local user.email "action@github.com"
-    git config --local user.name "GitHub Action"
+name: Edit and Update Repo
 
-    git add d.sh
-    git commit -m "Update d.sh via GitHub Actions"
-    git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  edit_and_push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Edit File
+        run: |
+          # Your script/command to edit the file
+          echo "Hello, World!" > d.sh
+
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+          git add d.sh
+          git commit -m "Update d.sh via GitHub Actions"
+          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
