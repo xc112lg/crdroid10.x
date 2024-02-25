@@ -1,4 +1,4 @@
-name: Edit and Update Repo
+name: Edit and Push File
 
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
       - name: Edit File
         run: |
           # Your script/command to edit the file
-          echo "Hello, World!" > d.sh
+          echo "echo 'Hello, World!'" > d.sh
 
       - name: Commit and Push Changes
         run: |
@@ -25,4 +25,6 @@ jobs:
 
           git add d.sh
           git commit -m "Update d.sh via GitHub Actions"
-          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+          
+          # Use a personal access token (PAT) to authenticate
+          git push https://${{ secrets.GITHU_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
