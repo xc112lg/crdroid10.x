@@ -1,4 +1,4 @@
-name: Edit d.sh and Push Changes
+name: Edit and Push d.sh
 
 on:
   push:
@@ -6,21 +6,33 @@ on:
       - main
 
 jobs:
-  edit-dsh-and-push:
+  edit-and-push:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Grant execute permissions to d.sh
+        run: chmod +x d.sh
+
       - name: Edit the d.sh file
         run: |
           echo 'echo "Hello, World!"' > d.sh
 
-      - name: Commit and push changes
+      - name: Configure Git with PAT
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          git remote add origin_with_token https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY
+
+      - name: Debug
+        run: |
+          ls -la
+          git status
+
+      - name: Commit and push changes
+        run: |
           git add d.sh
           git commit -m "Edit d.sh via GitHub Actions"
-          git push
+          git push origin_with_token HEAD:main
