@@ -27,6 +27,7 @@ jobs:
 
       - name: Commit and push changes
         run: |
+          gh auth login --with-token ${{ secrets.GH_TOKEN }}
           git add d.sh
           git commit -m "Edit d.sh via GitHub Actions"
           git push origin HEAD:main
