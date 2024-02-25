@@ -1,4 +1,4 @@
-name: Edit and Push d.sh
+name: Edit and Update Repo
 
 on:
   push:
@@ -6,28 +6,23 @@ on:
       - main
 
 jobs:
-  edit-and-push:
+  edit_and_push:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Grant execute permissions to d.sh
-        run: chmod +x d.sh
-
-      - name: Edit the d.sh file
+      - name: Edit File
         run: |
-          echo 'echo "Hello, World!"' > d.sh
+          # Your script/command to edit the file
+          echo "Hello, World!" > d.sh
 
-      - name: Configure Git
+      - name: Commit and Push Changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
-      - name: Commit and push changes
-        run: |
-          gh auth login --with-token ${{ secrets.GH_TOKEN }}
           git add d.sh
-          git commit -m "Edit d.sh via GitHub Actions"
-          git push origin HEAD:main
+          git commit -m "Update d.sh via GitHub Actions"
+          git push
