@@ -33,7 +33,7 @@ def parse_manifest(manifest_path):
     return projects
 
 def main():
-    manifest_path = 'path/to/manifest.xml'  # Adjust this path
+    manifest_path = '.repo/manifest.xml'  # Adjust this path
 
     projects = parse_manifest(manifest_path)
 
