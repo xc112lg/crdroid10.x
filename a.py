@@ -14,7 +14,7 @@ override_prebuilt_shared_library {{
     override_dir = os.path.join(repo_path, "prebuilts_override")
     os.makedirs(override_dir, exist_ok=True)
 
-    # Write the override .bp file
+    # Wrsite the override .bp file
     bp_path = os.path.join(override_dir, "Android.override.bp")
     with open(bp_path, 'w') as f:
         f.write(override_content)
