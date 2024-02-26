@@ -1,0 +1,21 @@
+name: Download File Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  download-file:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set File URL
+      id: set_url
+      run: echo "::set-output name=url::https://raw.githubusercontent.com/${{ github.repository }}/main/cd10.sh"
+
+    - name: Download File
+      run: wget -O cd10.sh "${{ steps.set_url.outputs.url }}"

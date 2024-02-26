@@ -1,0 +1,37 @@
+name: Edit and Push File
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  edit_and_push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Edit File
+        run: |
+          # Your script/command to edit the file
+          echo "echo 'Hello, World!'" > d.sh
+
+      - name: Debug
+        run: |
+          echo "Token: ${{ secrets.GITHU_TOKEN }}"
+          env
+
+      - name: Commit and Push Changesffd
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+          git add d.sh
+          git commit -m "Update d.sh via GitHub Actions"
+          
+          # Use the default GITHUB_TOKEN for authentication
+          git push --force https://${{ secrets.GITHU_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+
+
