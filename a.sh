@@ -38,5 +38,5 @@ mv h870/* h872/* us997/* ./crdroid10.x/
 export GH_TOKEN=$(cat ../gh_token.txt)
 gh auth login --with-token $GH_TOKEN
 cd crdroid10.x
-chmod u+x upload.sh
-. upload.sh
+chmod u+x multi_upload.sh
+. multi_upload.sh
