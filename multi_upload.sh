@@ -19,8 +19,7 @@ else
     echo "Already authenticated with GitHub."
 fi
 
-# Prompt the user for the version
-read -p "Enter the release tag name (default: crDroidAndroid-14.0-$(date '+%Y%m%d')): " custom_version
+
 
 # Set the version with default if not provided
 version=${custom_version:-"crDroidAndroid-14.0-$(date '+%Y%m%d')"}
@@ -28,7 +27,6 @@ version=${custom_version:-"crDroidAndroid-14.0-$(date '+%Y%m%d')"}
 # Check if the tag already exists
 if gh release view "$version" &> /dev/null; then
     # Tag exists, ask for confirmation to delete the tag and releases
-    read -p "Tag $version already exists. Press Enter to delete it and its releases or Ctrl+C to cancel..."
     echo "Deleting existing tag and releases for $version..."
     gh release delete "$version" --yes
     git tag -d "$version"
