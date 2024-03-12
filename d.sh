@@ -26,6 +26,9 @@ cd msm8996_lge_kernel
 
 
 
+https://github.com/xc112lg/crdroid10.x/releases/download/crDroidAndroid-14.0-20240305/crDroidAndroid-14.0-20240305-h870-v10.2.zip
+
+
 
 
 
