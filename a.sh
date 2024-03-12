@@ -32,7 +32,10 @@ git add .
 git commit -m "update"
 git push 
 cd ..
-
+if [ -z "$(find "$source_folder" -type f \( -name "*.zip" -o -name "*.img" \))" ]; then
+    echo "No .zip or .img files found in $source_folder or its subdirectories. Exiting."
+    exit 1
+fi
 mv h870/* h872/* us997/* ./crdroid10.x/ 
 
 export GH_TOKEN=$(cat ../gh_token.txt)
