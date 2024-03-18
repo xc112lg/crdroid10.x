@@ -4,7 +4,7 @@ rm -rf h870/* h872/* us997/*
 rm crdroid10.x/*.zip
 rm crdroid10.x/*.img
 rm crdroid10.x/*.txt
-
+crave ssh -- ls
 crave pull out/target/product/*/*.zip out/target/product/*/recovery.img out/target/product/*/*.json out/target/product/*/changelog_*.txt 
 mv h870/recovery.img h870/recoveryh870.img
 mv h872/recovery.img h872/recoveryh872.img
