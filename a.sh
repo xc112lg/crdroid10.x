@@ -1,5 +1,5 @@
 #!/bin/bash
-
+source_folder="."
 rm -rf h870/* h872/* us997/* 
 rm crdroid10.x/*.zip
 rm crdroid10.x/*.img
